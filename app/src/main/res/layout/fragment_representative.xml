@@ -16,7 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/representatives_search_header"/>
 
         <!-- TODO: Add data binding value -->
         <!-- TODO: Add visual styling and content -->
@@ -24,7 +25,8 @@
             android:id="@+id/address_line_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints=""
+            android:hint="@string/representatives_address_1"
+            android:autofillHints="@string/representatives_address_1"
             android:inputType="textPostalAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_title" />
@@ -35,6 +37,7 @@
             android:id="@+id/address_line_2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:hint="@string/representatives_address_2"
             android:autofillHints=""
             android:inputType="textPostalAddress"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +49,7 @@
             android:id="@+id/city"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:hint="@string/representatives_city"
             android:autofillHints=""
             android:inputType="textPostalAddress"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +76,7 @@
             android:id="@+id/zip"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:hint="@string/representatives_zip"
             android:autofillHints=""
             android:inputType="number"
             android:maxLength="5"
@@ -84,6 +89,7 @@
             android:id="@+id/button_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/button_search_header"
             app:layout_constraintTop_toBottomOf="@id/zip" />
 
         <!-- TODO: Add visual styling and content -->
@@ -91,6 +97,7 @@
             android:id="@+id/button_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/button_location_header"
             app:layout_constraintTop_toBottomOf="@id/button_search" />
 
         <!-- TODO: Add visual styling and content -->
@@ -98,10 +105,20 @@
             android:id="@+id/representative_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/representatives_header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_location" />
 
         <!-- TODO: Add Representatives RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/representatives_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/representative_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <!-- TODO: Add visual styling and content -->
         <TextView
