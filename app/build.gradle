@@ -26,6 +26,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'CIVIC_API_KEY', apiKey
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -48,8 +51,18 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//    implementation "androidx.legacy:legacy-support-v4:$androidXLegacySupport"
+    implementation "androidx.annotation:annotation:$androidXAnnotations"
+    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
+
+    //RecyclerView dependencies
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
 
     //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinCoroutinesVersion"
 
 
     //Room dependencies
@@ -57,16 +70,23 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
+    //ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
+
     //Navigation dependencies
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
-    // Retrofit dependencies
+
+    //Retrofit dependencies
     implementation "com.squareup.retrofit2:retrofit: $retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofitCoroutinesAdapterVersion"
 
-    // Moshi dependencies
+    //Moshi dependencies
     implementation "com.squareup.moshi:moshi:$moshiVersion"
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     implementation "com.squareup.moshi:moshi-adapters:$moshiVersion"
@@ -77,6 +97,7 @@ dependencies {
     //Location dependencies
     implementation "com.google.android.gms:play-services-location:$locationServicesVersion"
 
+
     //Testing dependencies
 
     //Test package
@@ -85,4 +106,8 @@ dependencies {
     //AndroidTest package
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //Location dependencies
+    implementation "com.google.android.gms:play-services-location:$locationServicesVersion"
+
 }
