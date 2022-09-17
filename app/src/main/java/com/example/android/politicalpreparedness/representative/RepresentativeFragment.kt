@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
+import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import java.util.Locale
 
 class DetailFragment : Fragment() {
@@ -17,10 +20,22 @@ class DetailFragment : Fragment() {
     }
 
     //TODO: Declare ViewModel
+    private val _viewModel: RepresentativeViewModel by lazy {
+        ViewModelProvider(this)[RepresentativeViewModel::class.java]
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        val _binding = FragmentRepresentativeBinding.inflate(inflater)
+
+        _binding.representativeViewModel = _viewModel
+
+        _binding.representativesList.adapter = RepresentativeListAdapter(RepresentativeListAdapter.OnClickListener{
+
+        })
+
 
         //TODO: Establish bindings
 
