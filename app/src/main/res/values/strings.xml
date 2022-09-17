@@ -14,5 +14,9 @@
     <string name="button_search_header">find my representatives</string>
     <string name="button_location_header">use my location</string>
     <string name="representatives_header">My Representatives</string>
+    <string name="representative_icon_content">Represent website</string>
+    <string name="web_icon_content">Represent website</string>
+    <string name="facebook_icon_content">Represent facebook</string>
+    <string name="twitter_icon_content">Represent twitter</string>
 
 </resources>

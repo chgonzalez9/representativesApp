@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <data>
+        <variable
+            name="representative"
+            type="com.example.android.politicalpreparedness.representative.model.Representative"/>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,23 +22,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@drawable/ic_profile"/>
+            app:profileImage="@{representative.official.photoUrl}"
+            tools:srcCompat="@drawable/ic_profile"
+            android:contentDescription="@string/representative_icon_content" />
 
         <TextView
-            android:id="@+id/representative_job"
+            android:id="@+id/representative_office"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/representative_icon"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Job Test"/>
+            android:text="@{representative.office.name}"
+            tools:text="Job Test"/>
 
         <TextView
             android:id="@+id/representative_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/representative_icon"
-            app:layout_constraintTop_toBottomOf="@id/representative_job"
-            android:text="Name Test"/>
+            app:layout_constraintTop_toBottomOf="@id/representative_office"
+            android:text="@{representative.official.name}"
+            tools:text="Name Test"/>
 
         <TextView
             android:id="@+id/representative_party"
@@ -39,7 +50,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/representative_icon"
             app:layout_constraintTop_toBottomOf="@id/representative_name"
-            android:text="Party Test"/>
+            android:text="@{representative.official.party}"
+            tools:text="Party Test"/>
 
         <ImageView
             android:id="@+id/web_icon"
@@ -47,13 +59,15 @@
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/facebook_icon"
-            app:srcCompat="@drawable/ic_www"/>
+            app:srcCompat="@drawable/ic_www"
+            android:contentDescription="@string/web_icon_content" />
 
         <ImageView
             android:id="@+id/facebook_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:srcCompat="@drawable/ic_facebook"
+            android:contentDescription="@string/facebook_icon_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/twitter_icon"/>
 
@@ -63,7 +77,8 @@
             android:layout_height="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@drawable/ic_twitter"/>
+            app:srcCompat="@drawable/ic_twitter"
+            android:contentDescription="@string/twitter_icon_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
