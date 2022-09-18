@@ -15,7 +15,7 @@ import com.example.android.politicalpreparedness.databinding.RepresentativeListI
 import com.example.android.politicalpreparedness.network.models.Channel
 import com.example.android.politicalpreparedness.representative.model.Representative
 
-class RepresentativeListAdapter(val onClickListener: OnClickListener) :
+class RepresentativeListAdapter() :
     ListAdapter<Representative, RepresentativeListAdapter.RepresentativeViewHolder>(RepresentativeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
@@ -24,9 +24,6 @@ class RepresentativeListAdapter(val onClickListener: OnClickListener) :
 
     override fun onBindViewHolder(holder: RepresentativeViewHolder, position: Int) {
         val item = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(item)
-        }
         holder.bind(item)
     }
 
@@ -35,11 +32,12 @@ class RepresentativeListAdapter(val onClickListener: OnClickListener) :
         fun bind(item: Representative) {
             binding.representative = item
             binding.representativeIcon.setImageResource(R.drawable.ic_profile)
-            binding.webIcon.setOnClickListener {
-                binding.representative.official.urls?.let { showWWWLinks(it) }
+
+            item.official.channels?.let{
+                showSocialLinks(it)
             }
-            binding.facebookIcon.setOnClickListener {
-                binding.representative.official.channels?.let { showSocialLinks(it) }
+            item.official.urls?.let{
+                showWWWLinks(it)
             }
 
             binding.executePendingBindings()
@@ -106,10 +104,6 @@ class RepresentativeListAdapter(val onClickListener: OnClickListener) :
             return oldItem == newItem
         }
 
-    }
-
-    class OnClickListener(val clickListener: (representative: Representative) -> Unit) {
-        fun onClick(representative: Representative) = clickListener(representative)
     }
 
 }

@@ -28,6 +28,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_voter_info.*
 import java.util.Locale
 
 class DetailFragment : Fragment() {
@@ -46,18 +47,28 @@ class DetailFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         val binding = FragmentRepresentativeBinding.inflate(inflater)
+        binding.lifecycleOwner = this
 
         binding.representativeViewModel = _viewModel
 
-        binding.representativesList.adapter = RepresentativeListAdapter(RepresentativeListAdapter.OnClickListener{
+        val adapter = RepresentativeListAdapter()
+        binding.representativesList.adapter = adapter
 
-        })
+        _viewModel.representatives.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+
+        _viewModel.address.observe(viewLifecycleOwner) {
+            _viewModel.getRepresentatives(it.toFormattedString())
+        }
 
         binding.buttonSearch.setOnClickListener {
             hideKeyboard()
+            _viewModel.getAddressFromUser(binding.state.selectedItem as String)
         }
 
         binding.buttonLocation.setOnClickListener {
+            hideKeyboard()
             checkLocationPermissions()
         }
 
@@ -155,7 +166,7 @@ class DetailFragment : Fragment() {
             if (it.isSuccessful && it.result != null) {
                 val locationResult = it.result
                 locationResult.run {
-                    val address = geoCodeLocation(this)
+                    _viewModel.getAddressFromLocation(geoCodeLocation(this))
                 }
             }
         }
