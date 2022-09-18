@@ -36,14 +36,11 @@ class RepresentativeListAdapter(val onClickListener: OnClickListener) :
             binding.representative = item
             binding.representativeIcon.setImageResource(R.drawable.ic_profile)
             binding.webIcon.setOnClickListener {
-                binding.representative.official.urls?.let { it -> showWWWLinks(it) }
+                binding.representative.official.urls?.let { showWWWLinks(it) }
             }
             binding.facebookIcon.setOnClickListener {
-                showSocialLinks()
+                binding.representative.official.channels?.let { showSocialLinks(it) }
             }
-
-            //TODO: Show social links ** Hint: Use provided helper methods
-            //TODO: Show www link ** Hint: Use provided helper methods
 
             binding.executePendingBindings()
         }
