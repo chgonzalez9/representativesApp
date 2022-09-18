@@ -27,8 +27,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_voter_info.*
 import java.util.Locale
 
 class DetailFragment : Fragment() {

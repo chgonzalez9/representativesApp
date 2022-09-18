@@ -20,6 +20,8 @@ class RepresentativeViewModel: ViewModel() {
     val address: LiveData<Address>
         get() = _address
 
+    val state = MutableLiveData<String>()
+
 
     fun getRepresentatives(address: String) {
         viewModelScope.launch {
