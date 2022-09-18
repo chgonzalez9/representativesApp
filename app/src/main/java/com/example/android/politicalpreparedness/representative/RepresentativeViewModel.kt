@@ -1,8 +1,13 @@
 package com.example.android.politicalpreparedness.representative
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android.politicalpreparedness.util.SingleLiveEvent
 
 class RepresentativeViewModel: ViewModel() {
+
+    val showSnackBar: SingleLiveEvent<String> = SingleLiveEvent()
+    val showSnackBarInt: SingleLiveEvent<Int> = SingleLiveEvent()
 
     //TODO: Establish live data for representatives and address
 
