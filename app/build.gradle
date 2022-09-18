@@ -62,7 +62,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinCoroutinesVersion"
+//    implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$kotlinCoroutinesVersion"
 
 
     //Room dependencies
