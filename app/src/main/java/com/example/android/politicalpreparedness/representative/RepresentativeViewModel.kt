@@ -1,14 +1,37 @@
 package com.example.android.politicalpreparedness.representative
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.android.politicalpreparedness.network.models.Address
+import com.example.android.politicalpreparedness.network.models.Office
+import com.example.android.politicalpreparedness.network.models.Official
 import com.example.android.politicalpreparedness.util.SingleLiveEvent
 
-class RepresentativeViewModel: ViewModel() {
+class RepresentativeViewModel(application: Application): AndroidViewModel(application) {
 
     val showSnackBar: SingleLiveEvent<String> = SingleLiveEvent()
     val showSnackBarInt: SingleLiveEvent<Int> = SingleLiveEvent()
 
+    private val _officials = MutableLiveData<Official>()
+    val officials : LiveData<Official>
+        get() = _officials
+
+    private val _offices = MutableLiveData<Office>()
+    val offices : LiveData<Office>
+        get() = _offices
+
+    private val _address = MutableLiveData<Address>()
+    val address: LiveData<Address>
+        get() = _address
+
+    init {
+
+    }
+
+    fun getRepresentatives() {
+    }
     //TODO: Establish live data for representatives and address
 
     //TODO: Create function to fetch representatives from API from a provided address
