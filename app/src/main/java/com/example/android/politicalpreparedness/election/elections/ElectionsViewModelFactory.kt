@@ -1,4 +1,4 @@
-package com.example.android.politicalpreparedness.election
+package com.example.android.politicalpreparedness.election.elections
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
