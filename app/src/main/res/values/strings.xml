@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">Political Preparedness</string>
 
+    <!-- Elections and Voter Info-->
     <string name="elections_header">Upcoming Elections</string>
     <string name="saved_elections_header">Saved Elections</string>
+
+    <!-- Representatives -->
+    <string name="representatives_search_header">Representative Search</string>
+    <string name="representatives_address_1">Address Line 1</string>
+    <string name="representatives_address_2">Address Line 2</string>
+    <string name="representatives_city">City</string>
+    <string name="representatives_zip">Zip</string>
+    <string name="button_search_header">find my representatives</string>
+    <string name="button_location_header">use my location</string>
+    <string name="representatives_header">My Representatives</string>
+    <string name="representative_icon_content">Represent website</string>
+    <string name="web_icon_content">Represent website</string>
+    <string name="facebook_icon_content">Represent facebook</string>
+    <string name="twitter_icon_content">Represent twitter</string>
+
+    <string name="determine_location_error">Unable to determine location.</string>
+
 </resources>
