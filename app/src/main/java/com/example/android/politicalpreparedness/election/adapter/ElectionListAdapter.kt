@@ -29,11 +29,11 @@ class ElectionListAdapter(private val clickListener: ElectionListener): ListAdap
         }
 
         companion object {
-            fun from(parent: ViewGroup): ElectionListAdapter.ElectionViewHolder {
+            fun from(parent: ViewGroup): ElectionViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val view = ElectionListItemBinding.inflate(layoutInflater, parent, false)
 
-                return ElectionListAdapter.ElectionViewHolder(view)
+                return ElectionViewHolder(view)
             }
         }
 
