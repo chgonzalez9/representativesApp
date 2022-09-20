@@ -18,10 +18,6 @@ class ElectionsFragment: Fragment() {
         ViewModelProvider(this)[ElectionsViewModel::class.java]
     }
 
-    private val _navController by lazy {
-        findNavController()
-    }
-
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
