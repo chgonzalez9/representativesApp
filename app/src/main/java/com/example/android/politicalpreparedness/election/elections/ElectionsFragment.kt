@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -27,17 +28,28 @@ class ElectionsFragment: Fragment() {
 
         binding.electionsViewModel = _viewModel
 
-        binding.upcomingElections.adapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
-            findNavController().navigate(ElectionsFragmentDirections.toVoterInfo(it.id, it.division))
+        val upcomingAdapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
+            _viewModel.navigateToVoterInfo(it)
         })
 
-        binding.savedElections.adapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
-            findNavController().navigate(ElectionsFragmentDirections.toVoterInfo(it.id, it.division))
+        val savedAdapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
+//            findNavController().navigate(ElectionsFragmentDirections.toVoterInfo(it.id, it.division))
+            _viewModel.navigateToVoterInfo(it)
         })
+
+        binding.upcomingElections.adapter = upcomingAdapter
+
+        binding.savedElections.adapter = savedAdapter
+
+        _viewModel.upcomingElections.observe(viewLifecycleOwner) {
+            upcomingAdapter.submitList(it)
+        }
+
+        _viewModel.savedElections.observe(viewLifecycleOwner) {
+            savedAdapter.submitList(it)
+        }
 
         return binding.root
     }
-
-    //TODO: Refresh adapters when fragment loads
 
 }
