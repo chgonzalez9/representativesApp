@@ -23,11 +23,13 @@ import com.example.android.politicalpreparedness.databinding.FragmentRepresentat
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import com.example.android.politicalpreparedness.representative.adapter.setNewValue
+import com.example.android.politicalpreparedness.util.Constants
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
+import kotlinx.android.synthetic.main.fragment_representative.view.*
 import java.util.Locale
 
 class DetailFragment : Fragment() {
@@ -58,7 +60,6 @@ class DetailFragment : Fragment() {
         }
 
         _viewModel.address.observe(viewLifecycleOwner) {
-//            _viewModel.getRepresentatives(it.toFormattedString())
             binding.state.setNewValue(it.state)
         }
 
