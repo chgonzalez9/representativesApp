@@ -169,6 +169,7 @@ class DetailFragment : Fragment() {
                 val locationResult = it.result
                 locationResult.run {
                     _viewModel.getAddressFromLocation(geoCodeLocation(this))
+                    _viewModel.getRepresentatives(_viewModel.address.value.toString())
                 }
             }
         }
