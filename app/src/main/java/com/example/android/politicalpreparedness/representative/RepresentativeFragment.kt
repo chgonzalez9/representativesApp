@@ -22,6 +22,7 @@ import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
+import com.example.android.politicalpreparedness.representative.adapter.setNewValue
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -57,12 +58,14 @@ class DetailFragment : Fragment() {
         }
 
         _viewModel.address.observe(viewLifecycleOwner) {
-            _viewModel.getRepresentatives(it.toFormattedString())
+//            _viewModel.getRepresentatives(it.toFormattedString())
+            binding.state.setNewValue(it.state)
         }
 
         binding.buttonSearch.setOnClickListener {
             hideKeyboard()
-            _viewModel.getAddressFromUser(binding.state.selectedItem as String)
+            _viewModel.getAddressFromUser()
+            _viewModel.getRepresentatives(_viewModel.address.value.toString())
         }
 
         binding.buttonLocation.setOnClickListener {
