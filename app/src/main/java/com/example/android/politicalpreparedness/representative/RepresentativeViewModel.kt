@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.model.Representative
+import com.example.android.politicalpreparedness.util.Constants
 import com.example.android.politicalpreparedness.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
@@ -48,7 +49,7 @@ class RepresentativeViewModel: ViewModel() {
             "",
             "",
             "",
-            "Alabama",
+            "New York",
             ""
         )
     }
