@@ -6,7 +6,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import com.example.android.politicalpreparedness.network.models.Election
 
 @Dao
@@ -22,7 +21,7 @@ interface ElectionDao {
 
     //TODO: Add select single election query
     @Query("SELECT * FROM election_table")
-    suspend fun get(id: Int): Election?
+    suspend fun get(): Election?
 
     //TODO: Add delete query
     @Delete

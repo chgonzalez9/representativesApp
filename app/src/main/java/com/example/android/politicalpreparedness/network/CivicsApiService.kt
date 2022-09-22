@@ -7,15 +7,18 @@ import com.example.android.politicalpreparedness.network.models.VoterInfoRespons
 import com.example.android.politicalpreparedness.util.Constants
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.*
 
 private val moshi = Moshi.Builder()
         .add(ElectionAdapter())
         .add(KotlinJsonAdapterFactory())
+        .add(Date::class.java, Rfc3339DateJsonAdapter())
         .build()
 
 private val retrofit = Retrofit.Builder()

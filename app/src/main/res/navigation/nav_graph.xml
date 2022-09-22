@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/electionsFragment"
-        android:name="com.example.android.politicalpreparedness.election.ElectionsFragment"
+        android:name="com.example.android.politicalpreparedness.election.elections.ElectionsFragment"
         android:label="ElectionsFragment" >
         <action
             android:id="@+id/to_voterInfo"
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/voterInfoFragment"
-        android:name="com.example.android.politicalpreparedness.election.VoterInfoFragment"
+        android:name="com.example.android.politicalpreparedness.election.info.VoterInfoFragment"
         android:label="VoterInfoFragment" >
         <argument
             android:name="arg_election_id"

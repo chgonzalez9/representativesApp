@@ -20,7 +20,15 @@ class RepresentativeViewModel: ViewModel() {
     val address: LiveData<Address>
         get() = _address
 
-    val state = MutableLiveData<String>()
+    init {
+//        _address.value = Address(
+//            "",
+//            "",
+//            "",
+//            "Alabama",
+//            ""
+//        )
+    }
 
 
     fun getRepresentatives(address: String) {
@@ -35,12 +43,12 @@ class RepresentativeViewModel: ViewModel() {
         _address.value = location
     }
 
-    fun getAddressFromUser(state: String) {
+    fun getAddressFromUser() {
         _address.value = Address(
             "",
             "",
             "",
-            state,
+            "Alabama",
             ""
         )
     }
