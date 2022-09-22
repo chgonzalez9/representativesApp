@@ -16,7 +16,7 @@ import com.example.android.politicalpreparedness.representative.RepresentativeVi
 class ElectionsFragment: Fragment() {
 
     private val _viewModel: ElectionsViewModel by lazy {
-        ViewModelProvider(this)[ElectionsViewModel::class.java]
+        ViewModelProvider(this, ElectionsViewModelFactory(requireContext()))[ElectionsViewModel::class.java]
     }
 
     override fun onCreateView(inflater: LayoutInflater,

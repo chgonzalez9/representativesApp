@@ -16,9 +16,9 @@ import retrofit2.http.Query
 import java.util.*
 
 private val moshi = Moshi.Builder()
-//        .add(Date::class.java, Rfc3339DateJsonAdapter())
         .add(ElectionAdapter())
         .add(KotlinJsonAdapterFactory())
+        .add(Date::class.java, Rfc3339DateJsonAdapter())
         .build()
 
 private val retrofit = Retrofit.Builder()
