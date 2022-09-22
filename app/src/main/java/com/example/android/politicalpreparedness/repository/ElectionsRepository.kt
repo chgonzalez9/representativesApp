@@ -1,13 +1,16 @@
 package com.example.android.politicalpreparedness.repository
 
+import androidx.lifecycle.LiveData
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
+import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.network.models.ElectionResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ElectionsRepository(private val database: ElectionDatabase) {
 
-    suspend fun getElections() {
+    suspend fun refreshElections() {
         withContext(Dispatchers.IO) {
             try {
                 val elections = CivicsApi.retrofitService.getElections()
@@ -17,4 +20,9 @@ class ElectionsRepository(private val database: ElectionDatabase) {
             }
         }
     }
+
+    fun getElections(): LiveData<List<Election>> {
+        return database.electionDao.getALl()
+    }
+
 }

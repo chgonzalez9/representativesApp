@@ -18,13 +18,17 @@ class ElectionListAdapter(private val clickListener: ElectionListener): ListAdap
     override fun onBindViewHolder(holder: ElectionViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(item)
+        }
     }
 
     class ElectionViewHolder(val binding: ElectionListItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Election) {
             binding.election = item
-
+            binding.root.setOnClickListener {
+            }
             binding.executePendingBindings()
         }
 
