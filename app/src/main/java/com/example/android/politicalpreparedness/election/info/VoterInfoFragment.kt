@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
 import com.example.android.politicalpreparedness.election.elections.ElectionsViewModel
 
 class VoterInfoFragment : Fragment() {
 
     private val _viewModel: VoterInfoViewModel by lazy {
-        ViewModelProvider(this)[VoterInfoViewModel::class.java]
+        ViewModelProvider(this,
+        VoterInfoViewModelFactory(ElectionDatabase.getInstance(requireContext()).electionDao)
+        )[VoterInfoViewModel::class.java]
     }
 
     override fun onCreateView(inflater: LayoutInflater,

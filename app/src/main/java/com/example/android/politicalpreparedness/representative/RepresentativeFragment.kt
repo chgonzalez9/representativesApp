@@ -65,8 +65,7 @@ class DetailFragment : Fragment() {
 
         binding.buttonSearch.setOnClickListener {
             hideKeyboard()
-            _viewModel.getAddressFromUser()
-            _viewModel.getRepresentatives(_viewModel.address.value.toString())
+            getFromUser()
         }
 
         binding.buttonLocation.setOnClickListener {
@@ -159,6 +158,13 @@ class DetailFragment : Fragment() {
                 getLocation()
             }
         }
+    }
+
+    private fun getFromUser() {
+
+        _viewModel.getAddressFromUser()
+        _viewModel.getRepresentatives(_viewModel.address.value.toString())
+
     }
 
     @SuppressLint("MissingPermission")
