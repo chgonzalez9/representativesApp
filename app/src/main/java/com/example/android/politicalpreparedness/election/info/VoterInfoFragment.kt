@@ -12,9 +12,14 @@ class VoterInfoFragment : Fragment() {
 
     private val _viewModel: VoterInfoViewModel by lazy {
         ViewModelProvider(this,
-        VoterInfoViewModelFactory(ElectionDatabase.getInstance(requireContext()).electionDao)
+        VoterInfoViewModelFactory(electionId, division, dataSource)
         )[VoterInfoViewModel::class.java]
     }
+
+    private val electionId = VoterInfoFragmentArgs.fromBundle(requireArguments()).argElectionId
+    private val division = VoterInfoFragmentArgs.fromBundle(requireArguments()).argDivision
+
+    private val dataSource = ElectionDatabase.getInstance(requireContext()).electionDao
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -24,10 +29,6 @@ class VoterInfoFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.voterInfoViewModel = _viewModel
-
-        //TODO: Add ViewModel values and create ViewModel
-
-        //TODO: Add binding values
 
         //TODO: Populate voter info -- hide views without provided data.
         /**

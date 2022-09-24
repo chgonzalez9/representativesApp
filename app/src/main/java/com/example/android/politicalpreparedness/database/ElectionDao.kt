@@ -25,7 +25,7 @@ interface ElectionDao {
 
     //TODO: Add delete query
     @Query("DELETE FROM election_table WHERE id = :id")
-    suspend fun deleteElection(id: Int)
+    suspend fun delete(id: Int)
 
     //TODO: Add clear query
     @Delete
