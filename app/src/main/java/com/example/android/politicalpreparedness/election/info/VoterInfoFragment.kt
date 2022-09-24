@@ -6,20 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
-import com.example.android.politicalpreparedness.election.elections.ElectionsViewModel
 
 class VoterInfoFragment : Fragment() {
 
-    private val _viewModel: VoterInfoViewModel by lazy {
-        ViewModelProvider(this,
-        VoterInfoViewModelFactory(electionId, division, dataSource)
-        )[VoterInfoViewModel::class.java]
-    }
-
-    private val electionId = VoterInfoFragmentArgs.fromBundle(requireArguments()).argElectionId
-    private val division = VoterInfoFragmentArgs.fromBundle(requireArguments()).argDivision
-
-    private val dataSource = ElectionDatabase.getInstance(requireContext()).electionDao
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -28,7 +17,16 @@ class VoterInfoFragment : Fragment() {
         val binding = FragmentVoterInfoBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        binding.voterInfoViewModel = _viewModel
+        val electionId = VoterInfoFragmentArgs.fromBundle(requireArguments()).argElectionId
+        val division = VoterInfoFragmentArgs.fromBundle(requireArguments()).argDivision
+        val dataSource = ElectionDatabase.getInstance(requireContext()).electionDao
+
+        val viewModel = ViewModelProvider(this,
+            VoterInfoViewModelFactory(electionId, division, dataSource)
+        )[VoterInfoViewModel::class.java]
+
+        binding.voterInfoViewModel = viewModel
+
 
         //TODO: Populate voter info -- hide views without provided data.
         /**

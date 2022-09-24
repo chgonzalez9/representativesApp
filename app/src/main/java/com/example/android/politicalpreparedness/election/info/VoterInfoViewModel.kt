@@ -2,13 +2,11 @@ package com.example.android.politicalpreparedness.election.info
 
 import androidx.lifecycle.*
 import com.example.android.politicalpreparedness.database.ElectionDao
-import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Division
 import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
 import kotlinx.coroutines.launch
-import retrofit2.http.Query
 
 class VoterInfoViewModel(private val id :Int, private val division: Division, private val dataSource: ElectionDao) : ViewModel() {
 
@@ -16,6 +14,16 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
     private val _voterInfo = MutableLiveData<VoterInfoResponse>()
     val voterInfo: LiveData<VoterInfoResponse>
         get() = _voterInfo
+
+    private val stateTest = "alabama"
+
+//    private val address =
+//        if (division.state.isEmpty()) {
+//            "${division.country}, $stateTest"
+//        } else {
+//           "${division.country}, ${division.state}"
+//        }
+
 
     init {
         getVoterInfo()
@@ -25,12 +33,19 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
     private fun getVoterInfo() {
         viewModelScope.launch {
             try {
-                _voterInfo.value = CivicsApi.retrofitService.getVoterInfo(division,id)
+                var address = division.state
+                address = if (address.isEmpty()) {
+                    "california"
+                } else {
+                    "${division.country}, ${division.state}"
+                }
+                _voterInfo.value = CivicsApi.retrofitService.getVoterInfo(address,id)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
+
 
     //TODO: Add var and methods to support loading URLs
 

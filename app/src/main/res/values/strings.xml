@@ -4,6 +4,8 @@
     <!-- Elections and Voter Info-->
     <string name="elections_header">Upcoming Elections</string>
     <string name="saved_elections_header">Saved Elections</string>
+    <string name="saved_button_follow">Follow Election</string>
+    <string name="saved_button_unfollow">Unfollow Election</string>
 
     <!-- Representatives -->
     <string name="representatives_search_header">Representative Search</string>
