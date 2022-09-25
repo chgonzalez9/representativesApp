@@ -15,10 +15,6 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
     val voterInfo: LiveData<VoterInfoResponse>
         get() = _voterInfo
 
-    private val _saveState = MutableLiveData<Boolean>()
-    val saveState: LiveData<Boolean>
-        get() = _saveState
-
     private val _savedCount: LiveData<Int>
         get() = dataSource.isSaved(id)
     val savedElection: LiveData<Boolean> = Transformations.map(_savedCount){
@@ -27,11 +23,18 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
         }
     }
 
+    val votingUrl = Transformations.map(_voterInfo){
+        it?.state?.get(0)?.electionAdministrationBody?.votingLocationFinderUrl
+    }
+
+    val ballotUrl = Transformations.map(_voterInfo){
+        it?.state?.get(0)?.electionAdministrationBody?.ballotInfoUrl
+    }
+
     init {
         getVoterInfo()
     }
 
-    //TODO: Add var and methods to populate voter info
     private fun getVoterInfo() {
         viewModelScope.launch {
             try {
@@ -51,8 +54,6 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
 
     //TODO: Add var and methods to support loading URLs
 
-    //TODO: Add var and methods to save and remove elections to local database
-    //TODO: cont'd -- Populate initial state of save button to reflect proper action based on election saved status
     fun saveElection() {
         viewModelScope.launch {
             _voterInfo.value!!.election.let {
@@ -68,9 +69,5 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
             }
         }
     }
-
-    /**
-     * Hint: The saved state can be accomplished in multiple ways. It is directly related to how elections are saved/removed from the database.
-     */
 
 }
