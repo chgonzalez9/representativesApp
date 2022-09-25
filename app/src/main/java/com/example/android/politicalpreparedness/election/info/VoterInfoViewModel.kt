@@ -19,6 +19,14 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
     val saveState: LiveData<Boolean>
         get() = _saveState
 
+    private val _savedCount: LiveData<Int>
+        get() = dataSource.isSaved(id)
+    val savedElection: LiveData<Boolean> = Transformations.map(_savedCount){
+        it?.let{
+            it > 0
+        }
+    }
+
     init {
         getVoterInfo()
     }
@@ -48,13 +56,15 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
     fun saveElection() {
         viewModelScope.launch {
             _voterInfo.value!!.election.let {
-                if (_saveState.value == true) {
-                    dataSource.delete(it.id)
-                    _saveState.value = false
-                } else {
-                    dataSource.insertAll(it)
-                    _saveState.value = true
-                }
+                dataSource.insertAll(it)
+            }
+        }
+    }
+
+    fun deleteElection() {
+        viewModelScope.launch {
+            _voterInfo.value!!.election.let {
+                dataSource.delete(it.id)
             }
         }
     }

@@ -23,6 +23,9 @@ interface ElectionDao {
     @Query("SELECT * FROM election_table WHERE id = :id")
     fun get(id: Int): LiveData<List<Election>>
 
+    @Query("SELECT COUNT(*) FROM election_table WHERE id = :id")
+    fun isSaved(id: Int): LiveData<Int>
+
     //TODO: Add delete query
     @Query("DELETE FROM election_table WHERE id = :id")
     suspend fun delete(id: Int)
