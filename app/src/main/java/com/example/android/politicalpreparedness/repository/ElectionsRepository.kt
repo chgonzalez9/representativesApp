@@ -14,7 +14,6 @@ class ElectionsRepository(private val database: ElectionDatabase) {
         withContext(Dispatchers.IO) {
             try {
                 val elections = CivicsApi.retrofitService.getElections()
-                database.electionDao.insertAll(*elections.elections.toTypedArray())
             } catch (e: Exception) {
                 e.printStackTrace()
             }

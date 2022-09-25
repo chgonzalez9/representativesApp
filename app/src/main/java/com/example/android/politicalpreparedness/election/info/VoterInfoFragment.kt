@@ -40,9 +40,9 @@ class VoterInfoFragment : Fragment() {
 
         //TODO: Handle save button UI state
         //TODO: cont'd Handle save button clicks
-        viewModel.savedElection.observe(viewLifecycleOwner, Observer {
+        viewModel.savedElection.observe(viewLifecycleOwner) {
             it?.let {
-                if(!it) {
+                if (!it) {
                     binding.saveButton.text = getString(R.string.saved_button_unfollow)
                     binding.saveButton.setOnClickListener {
                         viewModel.saveElection()
@@ -54,7 +54,7 @@ class VoterInfoFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
 
         return binding.root
     }
