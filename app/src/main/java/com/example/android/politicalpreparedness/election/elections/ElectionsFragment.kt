@@ -29,18 +29,16 @@ class ElectionsFragment: Fragment() {
         binding.electionsViewModel = _viewModel
 
         val upcomingAdapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
-            _viewModel.navigateToVoterInfo(it)
-        })
-
-        val savedAdapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
-            _viewModel.navigateToVoterInfo(it)
-        })
-
-        _viewModel.navigateToVoterInfo.observe(viewLifecycleOwner) {
             this.findNavController().navigate(
                 ElectionsFragmentDirections.toVoterInfo(it.id, it.division)
             )
-        }
+        })
+
+        val savedAdapter = ElectionListAdapter(ElectionListAdapter.ElectionListener {
+            this.findNavController().navigate(
+                ElectionsFragmentDirections.toVoterInfo(it.id, it.division)
+            )
+        })
 
         binding.upcomingElections.adapter = upcomingAdapter
 

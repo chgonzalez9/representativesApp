@@ -15,15 +15,9 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
     val voterInfo: LiveData<VoterInfoResponse>
         get() = _voterInfo
 
-    private val stateTest = "alabama"
-
-//    private val address =
-//        if (division.state.isEmpty()) {
-//            "${division.country}, $stateTest"
-//        } else {
-//           "${division.country}, ${division.state}"
-//        }
-
+    private val _saveState = MutableLiveData<Boolean>()
+    val saveState: LiveData<Boolean>
+        get() = _saveState
 
     init {
         getVoterInfo()
@@ -35,7 +29,7 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
             try {
                 var address = division.state
                 address = if (address.isEmpty()) {
-                    "california"
+                    "${division.country}, california"
                 } else {
                     "${division.country}, ${division.state}"
                 }
@@ -51,22 +45,16 @@ class VoterInfoViewModel(private val id :Int, private val division: Division, pr
 
     //TODO: Add var and methods to save and remove elections to local database
     //TODO: cont'd -- Populate initial state of save button to reflect proper action based on election saved status
-    fun saveElection(election: Election) {
+    fun saveElection() {
         viewModelScope.launch {
-            try {
-                dataSource.insertAll(election)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    fun deleteElection() {
-        viewModelScope.launch {
-            try {
-                dataSource.delete(id)
-            } catch (e: Exception) {
-                e.printStackTrace()
+            _voterInfo.value!!.election.let {
+                if (_saveState.value == true) {
+                    dataSource.delete(it.id)
+                    _saveState.value = false
+                } else {
+                    dataSource.insertAll(it)
+                    _saveState.value = true
+                }
             }
         }
     }
