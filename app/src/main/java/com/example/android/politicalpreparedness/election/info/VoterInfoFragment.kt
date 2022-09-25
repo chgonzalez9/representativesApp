@@ -43,12 +43,12 @@ class VoterInfoFragment : Fragment() {
         viewModel.savedElection.observe(viewLifecycleOwner) {
             it?.let {
                 if (!it) {
-                    binding.saveButton.text = getString(R.string.saved_button_unfollow)
+                    binding.saveButton.text = getString(R.string.saved_button_follow)
                     binding.saveButton.setOnClickListener {
                         viewModel.saveElection()
                     }
                 } else {
-                    binding.saveButton.text = getString(R.string.saved_button_follow)
+                    binding.saveButton.text = getString(R.string.saved_button_unfollow)
                     binding.saveButton.setOnClickListener {
                         viewModel.deleteElection()
                     }
