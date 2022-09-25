@@ -6,12 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide.init
 import com.example.android.politicalpreparedness.database.ElectionDatabase.Companion.getInstance
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Election
-import com.example.android.politicalpreparedness.network.models.ElectionResponse
-import com.example.android.politicalpreparedness.repository.ElectionsRepository
 import kotlinx.coroutines.launch
 
 class ElectionsViewModel(context: Context): ViewModel() {
@@ -24,22 +21,17 @@ class ElectionsViewModel(context: Context): ViewModel() {
     val savedElections : LiveData<List<Election>>
         get() = _savedElections
 
-    private val electionsObserver = Observer<List<Election>> {
-        _upcomingElections.value = it
+    private val savedElectionObserver = Observer<List<Election>> {
+        _savedElections.value = it
     }
 
-    private val _navigateToVoterInfo = MutableLiveData<Election>()
-    val navigateToVoterInfo: LiveData<Election>
-        get() = _navigateToVoterInfo
+    private lateinit var savedListLiveData: LiveData<List<Election>>
 
-//    private var electionsListLiveData: LiveData<List<Election>>
-
-    private val electionsRepository = ElectionsRepository(getInstance(context))
+    private val electionDatabase = getInstance(context)
 
     init {
         upcomingElections()
-        getElections()
-//        electionsListLiveData.observeForever(electionsObserver)
+        getSavedElections()
     }
 
     private fun upcomingElections() {
@@ -52,19 +44,20 @@ class ElectionsViewModel(context: Context): ViewModel() {
         }
     }
 
-    private fun getElections() {
+    private fun getSavedElections() {
         viewModelScope.launch {
             try {
-                electionsRepository.refreshElections()
-//                electionsListLiveData = electionsRepository.getElections()
+                savedListLiveData = electionDatabase.electionDao.getALl()
+                savedListLiveData.observeForever(savedElectionObserver)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-    fun navigateToVoterInfo(election: Election) {
-        _navigateToVoterInfo.value = election
+    override fun onCleared() {
+        super.onCleared()
+        savedListLiveData.removeObserver(savedElectionObserver)
     }
 
 }
