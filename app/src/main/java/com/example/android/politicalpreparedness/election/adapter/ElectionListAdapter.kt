@@ -17,6 +17,9 @@ class ElectionListAdapter(private val clickListener: ElectionListener): ListAdap
 
     override fun onBindViewHolder(holder: ElectionViewHolder, position: Int) {
         val item = getItem(position)
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(item)
+        }
         holder.bind(item)
     }
 
@@ -24,7 +27,6 @@ class ElectionListAdapter(private val clickListener: ElectionListener): ListAdap
 
         fun bind(item: Election) {
             binding.election = item
-
             binding.executePendingBindings()
         }
 
