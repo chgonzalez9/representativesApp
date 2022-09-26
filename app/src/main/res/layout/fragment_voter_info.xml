@@ -14,11 +14,12 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-        <!-- TODO: Add title to toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/election_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@color/white"
             android:padding="@dimen/default_padding"
             android:singleLine="true"
             app:title="@{voterInfoViewModel.voterInfo.election.name}"
@@ -44,7 +45,6 @@
             android:text="@{voterInfoViewModel.voterInfo.election.division.state}"
             tools:text="Michigan"/>
 
-        <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_locations"
@@ -57,7 +57,6 @@
             android:text="@string/voting_locations_text"
             tools:text="Voting Locations"/>
 
-        <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_ballot"
