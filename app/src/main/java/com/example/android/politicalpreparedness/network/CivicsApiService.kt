@@ -1,7 +1,6 @@
 package com.example.android.politicalpreparedness.network
 
 import com.example.android.politicalpreparedness.network.jsonadapter.ElectionAdapter
-import com.example.android.politicalpreparedness.network.models.Division
 import com.example.android.politicalpreparedness.network.models.ElectionResponse
 import com.example.android.politicalpreparedness.network.models.RepresentativeResponse
 import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
@@ -14,7 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 import java.util.*
 
 private val moshi = Moshi.Builder()
@@ -39,14 +37,8 @@ interface CivicsApiService {
     @GET("elections")
     suspend fun getElections() : ElectionResponse
 
-//    @GET("voterinfo")
-//    suspend fun getVoterInfo(@QueryMap map: Map<String, Any>): VoterInfoResponse
-
     @GET("voterinfo")
-    suspend fun getVoterInfo(
-        @Query("address") address: String,
-        @Query("electionId") id :Int
-    ) : VoterInfoResponse
+    suspend fun getVoterInfo() : VoterInfoResponse
 
     @GET("representatives")
     suspend fun getRepresentatives(

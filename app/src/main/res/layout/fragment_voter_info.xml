@@ -14,15 +14,13 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
+        <!-- TODO: Add title to toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/election_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:titleTextColor="@color/white"
             android:padding="@dimen/default_padding"
             android:singleLine="true"
-            app:title="@{voterInfoViewModel.voterInfo.election.name}"
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- TODO: Add visual styling -->
@@ -32,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_padding"
             app:layout_constraintTop_toBottomOf="@id/election_name"
-            android:text="@{voterInfoViewModel.voterInfo.election.electionDay.toString()}"
             tools:text="12 November 2055" />
 
         <!-- TODO: Add visual styling and content -->
@@ -42,31 +39,26 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/election_date"
             app:layout_constraintStart_toStartOf="@id/election_date"
-            android:text="@{voterInfoViewModel.voterInfo.election.division.state}"
             tools:text="Michigan"/>
 
+        <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_locations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/state_header"
             app:layout_constraintStart_toStartOf="@id/election_date"
-            tools:visibility="visible"
-            android:text="@string/voting_locations_text"
             tools:text="Voting Locations"/>
 
+        <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_ballot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/state_locations"
             app:layout_constraintStart_toStartOf="@id/election_date"
-            tools:visibility="visible"
-            android:text="@string/voting_ballot_text"
             tools:text="Voting ballot"/>
 
         <androidx.constraintlayout.widget.Group
@@ -81,8 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/state_ballot"
-            app:layout_constraintStart_toStartOf="@id/election_date"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/election_date" />
 
         <!-- TODO: Add data binding -->
         <TextView
@@ -90,19 +81,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/state_correspondence_header"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{voterInfoViewModel.voterInfo.pollingLocations}"/>
+            app:layout_constraintStart_toStartOf="@id/election_date" />
 
         <!-- TODO: Add button to save election to Room -->
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@string/saved_button_follow"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

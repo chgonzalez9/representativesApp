@@ -65,7 +65,8 @@ class DetailFragment : Fragment() {
 
         binding.buttonSearch.setOnClickListener {
             hideKeyboard()
-            getFromUser()
+            _viewModel.getAddressFromUser()
+            _viewModel.getRepresentatives(_viewModel.address.value.toString())
         }
 
         binding.buttonLocation.setOnClickListener {
@@ -160,13 +161,6 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun getFromUser() {
-
-        _viewModel.getAddressFromUser()
-        _viewModel.getRepresentatives(_viewModel.address.value.toString())
-
-    }
-
     @SuppressLint("MissingPermission")
     private fun getLocation() {
 
@@ -175,7 +169,6 @@ class DetailFragment : Fragment() {
                 val locationResult = it.result
                 locationResult.run {
                     _viewModel.getAddressFromLocation(geoCodeLocation(this))
-                    _viewModel.getRepresentatives(_viewModel.address.value.toString())
                 }
             }
         }
