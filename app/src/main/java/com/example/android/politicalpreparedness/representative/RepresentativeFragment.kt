@@ -9,7 +9,6 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
@@ -23,13 +22,11 @@ import com.example.android.politicalpreparedness.databinding.FragmentRepresentat
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import com.example.android.politicalpreparedness.representative.adapter.setNewValue
-import com.example.android.politicalpreparedness.util.Constants
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
-import kotlinx.android.synthetic.main.fragment_representative.view.*
 import java.util.Locale
 
 class DetailFragment : Fragment() {
@@ -174,7 +171,6 @@ class DetailFragment : Fragment() {
                 val locationResult = it.result
                 locationResult.run {
                     _viewModel.getAddressFromLocation(geoCodeLocation(this))
-//                    _viewModel.getRepresentatives(_viewModel.address.value.toString())
                 }
             }
         }
