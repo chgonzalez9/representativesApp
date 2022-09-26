@@ -21,6 +21,17 @@ class RepresentativeViewModel: ViewModel() {
     val address: LiveData<Address>
         get() = _address
 
+    init {
+//        _address.value = Address(
+//            "",
+//            "",
+//            "",
+//            "Alabama",
+//            ""
+//        )
+    }
+
+
     fun getRepresentatives(address: String) {
         viewModelScope.launch {
             val (offices, officials) = CivicsApi.retrofitService.getRepresentatives(address)

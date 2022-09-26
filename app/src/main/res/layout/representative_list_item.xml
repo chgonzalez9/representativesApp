@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/representative_icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,8 +53,8 @@
 
         <ImageView
             android:id="@+id/web_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/facebook_icon"
             app:srcCompat="@drawable/ic_www"
@@ -62,8 +62,8 @@
 
         <ImageView
             android:id="@+id/facebook_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/ic_facebook"
             android:contentDescription="@string/facebook_icon_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -71,8 +71,8 @@
 
         <ImageView
             android:id="@+id/twitter_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:srcCompat="@drawable/ic_twitter"

@@ -1,19 +1,17 @@
 package com.example.android.politicalpreparedness.election.info
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.android.politicalpreparedness.R
-import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
+import com.example.android.politicalpreparedness.election.elections.ElectionsViewModel
 
 class VoterInfoFragment : Fragment() {
 
-    private lateinit var _viewModel: VoterInfoViewModel
-
+    private val _viewModel: VoterInfoViewModel by lazy {
+        ViewModelProvider(this)[VoterInfoViewModel::class.java]
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -22,56 +20,26 @@ class VoterInfoFragment : Fragment() {
         val binding = FragmentVoterInfoBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val electionId = VoterInfoFragmentArgs.fromBundle(requireArguments()).argElectionId
-        val division = VoterInfoFragmentArgs.fromBundle(requireArguments()).argDivision
-        val dataSource = ElectionDatabase.getInstance(requireContext()).electionDao
-
-        _viewModel = ViewModelProvider(this,
-            VoterInfoViewModelFactory(electionId, division, dataSource)
-        )[VoterInfoViewModel::class.java]
-
         binding.voterInfoViewModel = _viewModel
 
-        _viewModel.votingUrl.observe(viewLifecycleOwner) {
-            it?.let { url ->
-                binding.stateLocations.visibility = View.VISIBLE
-                binding.stateLocations.setOnClickListener {
-                    intentURL(url)
-                }
-            }
-        }
+        //TODO: Add ViewModel values and create ViewModel
 
-        _viewModel.ballotUrl.observe(viewLifecycleOwner) {
-            it?.let{ url ->
-                binding.stateBallot.visibility = View.VISIBLE
-                binding.stateBallot.setOnClickListener {
-                    intentURL(url)
-                }
-            }
-        }
+        //TODO: Add binding values
 
-        _viewModel.savedElection.observe(viewLifecycleOwner) {
-            it?.let {
-                if (!it) {
-                    binding.saveButton.text = getString(R.string.saved_button_follow)
-                    binding.saveButton.setOnClickListener {
-                        _viewModel.saveElection()
-                    }
-                } else {
-                    binding.saveButton.text = getString(R.string.saved_button_unfollow)
-                    binding.saveButton.setOnClickListener {
-                        _viewModel.deleteElection()
-                    }
-                }
-            }
-        }
+        //TODO: Populate voter info -- hide views without provided data.
+        /**
+        Hint: You will need to ensure proper data is provided from previous fragment.
+        */
+
+
+        //TODO: Handle loading of URLs
+
+        //TODO: Handle save button UI state
+        //TODO: cont'd Handle save button clicks
 
         return binding.root
     }
 
-    private fun intentURL(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(intent)
-    }
+    //TODO: Create method to load URL intents
 
 }
