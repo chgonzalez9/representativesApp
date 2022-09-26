@@ -33,6 +33,7 @@
             android:layout_margin="@dimen/default_margin"
             app:layout_constraintTop_toBottomOf="@id/election_name"
             android:text="@{voterInfoViewModel.voterInfo.election.electionDay.toString()}"
+            android:textSize="@dimen/default_text_size"
             tools:text="12 November 2055" />
 
         <!-- TODO: Add visual styling and content -->
@@ -42,18 +43,32 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             app:layout_constraintTop_toBottomOf="@id/election_date"
-            app:layout_constraintStart_toStartOf="@id/election_date"
+            app:layout_constraintStart_toStartOf="parent"
             android:text="@{voterInfoViewModel.voterInfo.election.division.state}"
+            android:textSize="@dimen/default_text_size"
             tools:text="Michigan"/>
+
+        <TextView
+            android:id="@+id/election_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:padding="@dimen/default_padding"
+            android:text="@string/election_info_header"
+            android:textSize="@dimen/default_h2"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/state_locations"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/state_header" />
 
         <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_locations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="@dimen/default_padding"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/state_header"
+            app:layout_constraintTop_toBottomOf="@id/election_info"
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintBottom_toTopOf="@id/state_ballot"
             tools:visibility="visible"
@@ -65,7 +80,7 @@
             android:id="@+id/state_ballot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="@dimen/default_padding"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/state_locations"
             app:layout_constraintStart_toStartOf="@id/election_date"
@@ -84,6 +99,7 @@
             android:id="@+id/state_correspondence_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
             app:layout_constraintTop_toBottomOf="@id/state_ballot"
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -93,6 +109,7 @@
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
             app:layout_constraintTop_toBottomOf="@id/state_correspondence_header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

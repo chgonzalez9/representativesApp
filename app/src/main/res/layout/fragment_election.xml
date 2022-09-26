@@ -18,11 +18,14 @@
             android:id="@+id/upcoming_elections_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
             android:layout_margin="@dimen/default_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/upcoming_elections"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_header_size"
             android:text="@string/elections_header"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -34,17 +37,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upcoming_elections_header"
             app:layout_constraintBottom_toTopOf="@id/saved_elections_header"
+            tools:listitem="@layout/election_list_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <TextView
             android:id="@+id/saved_elections_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
             android:layout_margin="@dimen/default_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upcoming_elections"
             app:layout_constraintBottom_toTopOf="@id/saved_elections"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_header_size"
             android:text="@string/saved_elections_header"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -56,6 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/saved_elections_header"
             app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/election_list_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

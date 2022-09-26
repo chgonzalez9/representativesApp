@@ -26,6 +26,8 @@
             android:layout_marginBottom="@dimen/half_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_header_size"
             android:text="@string/representatives_search_header"/>
 
         <!-- TODO: Add data binding value -->
@@ -146,6 +148,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/half_margin"
             android:layout_marginStart="@dimen/default_margin"
+            android:textStyle="bold"
+            android:textSize="@dimen/default_header_size"
             android:text="@string/representatives_header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_location" />
