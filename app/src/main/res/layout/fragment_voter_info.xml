@@ -50,8 +50,11 @@
             android:id="@+id/state_locations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/state_header"
             app:layout_constraintStart_toStartOf="@id/election_date"
+            tools:visibility="visible"
+            android:text="@string/voting_locations_text"
             tools:text="Voting Locations"/>
 
         <!-- TODO: Add click binding to open web URL -->
@@ -60,8 +63,11 @@
             android:id="@+id/state_ballot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/state_locations"
             app:layout_constraintStart_toStartOf="@id/election_date"
+            tools:visibility="visible"
+            android:text="@string/voting_ballot_text"
             tools:text="Voting ballot"/>
 
         <androidx.constraintlayout.widget.Group
