@@ -36,7 +36,7 @@
             android:layout_marginStart="@dimen/default_button"
             android:layout_marginEnd="@dimen/default_button"
             android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginBottom="@dimen/bottom_margin"
+            android:layout_marginBottom="@dimen/default_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
