@@ -21,6 +21,7 @@ class RepresentativeViewModel: ViewModel() {
     val address: LiveData<Address>
         get() = _address
 
+
     fun getRepresentatives(address: String) {
         viewModelScope.launch {
             val (offices, officials) = CivicsApi.retrofitService.getRepresentatives(address)
@@ -33,12 +34,12 @@ class RepresentativeViewModel: ViewModel() {
         _address.value = location
     }
 
-    fun getAddressFromUser() {
+    fun getAddressFromUser(state: String) {
         _address.value = Address(
             "",
             "",
             "",
-            "New York",
+            state,
             ""
         )
     }

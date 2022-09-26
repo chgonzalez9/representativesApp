@@ -25,7 +25,6 @@
             app:title="@{voterInfoViewModel.voterInfo.election.name}"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- TODO: Add visual styling -->
         <TextView
             android:id="@+id/election_date"
             android:layout_width="match_parent"
@@ -36,7 +35,6 @@
             android:textSize="@dimen/default_text_size"
             tools:text="12 November 2055" />
 
-        <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_header"
             android:layout_width="wrap_content"
@@ -61,7 +59,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/state_header" />
 
-        <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_locations"
             android:layout_width="wrap_content"
@@ -75,7 +72,6 @@
             android:text="@string/voting_locations_text"
             tools:text="Voting Locations"/>
 
-        <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_ballot"
             android:layout_width="wrap_content"
@@ -94,7 +90,6 @@
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="state_correspondence_header,address" />
 
-        <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/state_correspondence_header"
             android:layout_width="wrap_content"
@@ -104,7 +99,6 @@
             app:layout_constraintStart_toStartOf="@id/election_date"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- TODO: Add data binding -->
         <TextView
             android:id="@+id/address"
             android:layout_width="wrap_content"
@@ -115,7 +109,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@{voterInfoViewModel.voterInfo.pollingLocations}"/>
 
-        <!-- TODO: Add button to save election to Room -->
         <Button
             android:id="@+id/save_button"
             android:layout_width="match_parent"

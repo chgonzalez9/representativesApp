@@ -27,14 +27,14 @@ class ElectionAdapter {
         return division.id
     }
 
-//    @FromJson
-//    fun dateFromJson(dateStr: String): Date? {
-//        return dateFormat.parse(dateStr)
-//    }
-//
-//    @ToJson
-//    fun dateToJson(date: Date): String {
-//        return dateFormat.format(date)
-//    }
+    @FromJson
+    fun dateFromJson(dateStr: String): Date? {
+        return dateFormat.parse(dateStr)
+    }
+
+    @ToJson
+    fun dateToJson(date: Date): String {
+        return dateFormat.format(date)
+    }
 
 }

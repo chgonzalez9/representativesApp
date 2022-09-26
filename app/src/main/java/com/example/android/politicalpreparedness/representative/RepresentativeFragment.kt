@@ -9,7 +9,6 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
@@ -23,13 +22,11 @@ import com.example.android.politicalpreparedness.databinding.FragmentRepresentat
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import com.example.android.politicalpreparedness.representative.adapter.setNewValue
-import com.example.android.politicalpreparedness.util.Constants
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
-import kotlinx.android.synthetic.main.fragment_representative.view.*
 import java.util.Locale
 
 class DetailFragment : Fragment() {
@@ -48,6 +45,7 @@ class DetailFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         val binding = FragmentRepresentativeBinding.inflate(inflater)
+        binding.executePendingBindings()
         binding.lifecycleOwner = this
 
         binding.representativeViewModel = _viewModel
@@ -56,16 +54,21 @@ class DetailFragment : Fragment() {
         binding.representativesList.adapter = adapter
 
         _viewModel.representatives.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            it?.let {
+                adapter.submitList(it)
+            }
         }
 
         _viewModel.address.observe(viewLifecycleOwner) {
-            binding.state.setNewValue(it.state)
+            it?.let {
+                _viewModel.getRepresentatives(it.toFormattedString())
+                binding.state.setNewValue(it.state)
+            }
         }
 
         binding.buttonSearch.setOnClickListener {
             hideKeyboard()
-            getFromUser()
+            _viewModel.getAddressFromUser(binding.state.selectedItem as String)
         }
 
         binding.buttonLocation.setOnClickListener {
@@ -160,13 +163,6 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun getFromUser() {
-
-        _viewModel.getAddressFromUser()
-        _viewModel.getRepresentatives(_viewModel.address.value.toString())
-
-    }
-
     @SuppressLint("MissingPermission")
     private fun getLocation() {
 
@@ -175,7 +171,6 @@ class DetailFragment : Fragment() {
                 val locationResult = it.result
                 locationResult.run {
                     _viewModel.getAddressFromLocation(geoCodeLocation(this))
-                    _viewModel.getRepresentatives(_viewModel.address.value.toString())
                 }
             }
         }
