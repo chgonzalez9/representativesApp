@@ -15,6 +15,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.R
@@ -40,11 +41,13 @@ class DetailFragment : Fragment() {
         ViewModelProvider(this)[RepresentativeViewModel::class.java]
     }
 
+    private lateinit var binding: FragmentRepresentativeBinding
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val binding = FragmentRepresentativeBinding.inflate(inflater)
+        binding = FragmentRepresentativeBinding.inflate(inflater)
         binding.executePendingBindings()
         binding.lifecycleOwner = this
 
@@ -76,11 +79,27 @@ class DetailFragment : Fragment() {
             checkLocationPermissions()
         }
 
+        savedInstanceState?.getParcelable<Address>("address")?.let{
+            _viewModel.getAddressFromLocation(it)
+        }
+
+        //Per Submission feedback
+        //Mentor article: https://knowledge.udacity.com/questions/809749
+        savedInstanceState?.getInt("motionLayout")?.let{
+            binding.representativesMotionLayout.transitionToState(it)
+        }
+
         requestPermissionsResult()
         askPermissions()
 
         return binding.root
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("motionLayout",binding.representativesMotionLayout.currentState)
+        outState.putParcelable("address",binding.representativeViewModel?.address?.value)
     }
 
     private fun checkLocationPermissions() {
