@@ -14,10 +14,12 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
@@ -43,6 +45,10 @@ class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentRepresentativeBinding
 
+    private val MOTIONLAYOUT_KEY = "motionLayout"
+    private val RECYCLER_INDEX_KEY = "recyclerIndex"
+    private val ADDRESS_KEY = "address"
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -59,6 +65,14 @@ class DetailFragment : Fragment() {
         _viewModel.representatives.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitList(it)
+            }
+            try {
+                savedInstanceState?.getInt(RECYCLER_INDEX_KEY).let {
+                    if (it != null) {
+                        binding.representativesList.layoutManager!!.scrollToPosition(it+it)
+                    }}
+            }catch (e:Exception){
+                e.printStackTrace()
             }
         }
 
@@ -79,15 +93,39 @@ class DetailFragment : Fragment() {
             checkLocationPermissions()
         }
 
-        savedInstanceState?.getParcelable<Address>("address")?.let{
+        savedInstanceState?.getParcelable<Address>(ADDRESS_KEY)?.let{
             _viewModel.getAddressFromLocation(it)
         }
 
-        //Per Submission feedback
-        //Mentor article: https://knowledge.udacity.com/questions/809749
-        savedInstanceState?.getInt("motionLayout")?.let{
+        savedInstanceState?.getInt(MOTIONLAYOUT_KEY)?.let{
             binding.representativesMotionLayout.transitionToState(it)
         }
+
+//        binding.representativesMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
+//            override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
+//            override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {}
+//            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+//                try {
+//                    savedInstanceState?.getInt(RECYCLER_INDEX_KEY).let {
+//                        if (it != null) {
+//                            binding.representativesList.layoutManager!!.scrollToPosition(it + it)
+//                        }
+//                    }
+//                } catch (e: Exception) {
+//                    e.printStackTrace()
+//                }
+//            }
+//            override fun onTransitionTrigger(
+//                motionLayout: MotionLayout?,
+//                triggerId: Int,
+//                positive: Boolean,
+//                progress: Float
+//            ) {
+//            }
+//        })
+//        savedInstanceState?.getInt(MOTIONLAYOUT_KEY)?.let {
+//            binding.representativesMotionLayout.transitionToState(it)
+//        }
 
         requestPermissionsResult()
         askPermissions()
@@ -98,8 +136,10 @@ class DetailFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("motionLayout",binding.representativesMotionLayout.currentState)
-        outState.putParcelable("address",binding.representativeViewModel?.address?.value)
+        outState.putInt(MOTIONLAYOUT_KEY,binding.representativesMotionLayout.currentState)
+        outState.putParcelable(ADDRESS_KEY,binding.representativeViewModel?.address?.value)
+        val index: Int = (binding.representativesList.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+        outState.putInt(RECYCLER_INDEX_KEY,index)
     }
 
     private fun checkLocationPermissions() {
