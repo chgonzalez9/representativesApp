@@ -101,31 +101,31 @@ class DetailFragment : Fragment() {
             binding.representativesMotionLayout.transitionToState(it)
         }
 
-//        binding.representativesMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
-//            override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
-//            override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {}
-//            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-//                try {
-//                    savedInstanceState?.getInt(RECYCLER_INDEX_KEY).let {
-//                        if (it != null) {
-//                            binding.representativesList.layoutManager!!.scrollToPosition(it + it)
-//                        }
-//                    }
-//                } catch (e: Exception) {
-//                    e.printStackTrace()
-//                }
-//            }
-//            override fun onTransitionTrigger(
-//                motionLayout: MotionLayout?,
-//                triggerId: Int,
-//                positive: Boolean,
-//                progress: Float
-//            ) {
-//            }
-//        })
-//        savedInstanceState?.getInt(MOTIONLAYOUT_KEY)?.let {
-//            binding.representativesMotionLayout.transitionToState(it)
-//        }
+        binding.representativesMotionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {}
+            override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {}
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                try {
+                    savedInstanceState?.getInt(RECYCLER_INDEX_KEY).let {
+                        if (it != null) {
+                            binding.representativesList.layoutManager!!.scrollToPosition(it + it)
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            override fun onTransitionTrigger(
+                motionLayout: MotionLayout?,
+                triggerId: Int,
+                positive: Boolean,
+                progress: Float
+            ) {
+            }
+        })
+        savedInstanceState?.getInt(MOTIONLAYOUT_KEY)?.let {
+            binding.representativesMotionLayout.transitionToState(it)
+        }
 
         requestPermissionsResult()
         askPermissions()
